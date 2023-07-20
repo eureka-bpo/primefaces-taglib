@@ -3,14 +3,43 @@
 	<groupId>eu.eureka-bpo.primefaces</groupId>
 	<artifactId>premiumschedule</artifactId>
 	<version>13.0.0-SNAPSHOT</version>
+
 	<name>Eureka-BPO PremiumSchedule</name>
+	<description>Eureka-BPO PremiumSchedule - Schedule Component for Primefaces with premium FullCalendar features: Vertical Resource View and Timeline View</description>
+	<url>https://github.com/eureka-bpo/primefaces-premiumschedule</url>
+
+	<scm>
+		<url>https://github.com/eureka-bpo/primefaces-premiumschedule</url>
+		<connection>scm:git:git@github.com:eureka-bpo/primefaces-premiumschedule.git</connection>
+		<developerConnection>scm:git:git@github.com:eureka-bpo/primefaces-premiumschedule.git</developerConnection>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/eureka-bpo/primefaces-premiumschedule/issues</url>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
 
 	<properties>
 		<primefaces.version>13.0.0</primefaces.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<source.directory>${project.basedir}/src/main/java</source.directory>
+		<gpg.executable>gpg</gpg.executable>
+		<nexus.host>s01.oss.sonatype.org</nexus.host>
+
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
-		<source.directory>${project.basedir}/src/main/java</source.directory>
+		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
 	</properties>
 
 	<profiles>
@@ -40,6 +69,25 @@
 			</dependencies>
 			<build>
 				<plugins>
+					<plugin>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<version>${maven-enforcer-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>enforce-java-1.8-11</id>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<requireJavaVersion>
+											<version>[1.8,12)</version>
+										</requireJavaVersion>
+									</rules>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>com.google.code.maven-replacer-plugin</groupId>
 						<artifactId>replacer</artifactId>
@@ -116,6 +164,30 @@
 							</execution>
 						</executions>
 					</plugin>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>${nexus-staging-maven-plugin.version}</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://${nexus.host}/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -143,6 +215,25 @@
 			</dependencies>
 			<build>
 				<plugins>
+					<plugin>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<version>${maven-enforcer-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>enforce-java-11</id>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<requireJavaVersion>
+											<version>[11,12)</version>
+										</requireJavaVersion>
+									</rules>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>
 						<version>3.11.0</version>
@@ -178,7 +269,116 @@
 									<file>${project.build.directory}/${project.build.finalName}.jar</file>
 								</configuration>
 							</execution>
+							<execution>
+								<id>install-jakarta-sources-classifier</id>
+								<phase>install</phase>
+								<goals>
+									<goal>install-file</goal>
+								</goals>
+								<configuration>
+									<classifier>jakarta-sources</classifier>
+									<file>${project.build.directory}/${project.build.finalName}-sources.jar</file>
+								</configuration>
+							</execution>
+							<execution>
+								<id>install-jakarta-javadoc-classifier</id>
+								<phase>install</phase>
+								<goals>
+									<goal>install-file</goal>
+								</goals>
+								<configuration>
+									<classifier>jakarta-javadoc</classifier>
+									<file>${project.build.directory}/${project.build.finalName}-javadoc.jar</file>
+								</configuration>
+							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<configuration>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<version>${project.version}</version>
+							<packaging>jar</packaging>
+							<repositoryId>ossrh</repositoryId>
+							<url>https://${nexus.host}/content/repositories/releases</url>
+							<generatePom>false</generatePom>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy-jakarta-classifier</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>sign-and-deploy-file</goal>
+								</goals>
+								<configuration>
+									<classifier>jakarta</classifier>
+									<file>${project.build.directory}/${project.build.finalName}.jar</file>
+								</configuration>
+							</execution>
+							<execution>
+								<id>deploy-jakarta-sources-classifier</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>sign-and-deploy-file</goal>
+								</goals>
+								<configuration>
+									<classifier>jakarta-sources</classifier>
+									<file>${project.build.directory}/${project.build.finalName}-sources.jar</file>
+								</configuration>
+							</execution>
+							<execution>
+								<id>deploy-jakarta-javadoc-classifier</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>sign-and-deploy-file</goal>
+								</goals>
+								<configuration>
+									<classifier>jakarta-javadoc</classifier>
+									<file>${project.build.directory}/${project.build.finalName}-javadoc.jar</file>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>publish</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven-source-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven-javadoc-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<doclint>none</doclint>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
