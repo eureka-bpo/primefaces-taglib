@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <name>eurekabpo_primefaces</name>
+
+    <component>
+        <component-type>eu.eurekabpo.primefaces.component.premiumschedule.PremiumSchedule</component-type>
+        <component-class>eu.eurekabpo.primefaces.component.premiumschedule.PremiumSchedule</component-class>
+    </component>
+
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>eu.eurekabpo.primefaces.component.premiumschedule.PremiumSchedule</renderer-type>
+            <renderer-class>eu.eurekabpo.primefaces.component.premiumschedule.PremiumScheduleRenderer</renderer-class>
+        </renderer>
+        <client-behavior-renderer>
+            <client-behavior-renderer-type>org.primefaces.component.AjaxBehaviorRenderer</client-behavior-renderer-type>
+            <client-behavior-renderer-class>org.primefaces.behavior.ajax.AjaxBehaviorRenderer</client-behavior-renderer-class>
+        </client-behavior-renderer>
+    </render-kit>
+
+</faces-config>
