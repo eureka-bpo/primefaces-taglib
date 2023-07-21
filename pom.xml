@@ -26,6 +26,15 @@
 		</license>
 	</licenses>
 
+	<developers>
+		<developer>
+			<email>support@eureka-bpo.eu</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
 	<properties>
 		<primefaces.version>13.0.0</primefaces.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -253,6 +262,12 @@
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
 					</plugin>
 					<plugin>
 						<artifactId>maven-gpg-plugin</artifactId>
