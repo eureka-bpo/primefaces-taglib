@@ -1,22 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.eureka-bpo.primefaces</groupId>
-	<artifactId>premiumschedule</artifactId>
+	<artifactId>eureka-bpo-primefaces</artifactId>
 	<version>13.0.0-SNAPSHOT</version>
 
-	<name>Eureka-BPO PremiumSchedule</name>
-	<description>Eureka-BPO PremiumSchedule - Schedule Component for Primefaces with premium FullCalendar features: Vertical Resource View and Timeline View</description>
-	<url>https://github.com/eureka-bpo/primefaces-premiumschedule</url>
+	<name>Eureka-BPO Primefaces taglib</name>
+	<description>Eureka-BPO Primefaces tag library</description>
+	<url>https://github.com/eureka-bpo/primefaces-taglib</url>
 
 	<scm>
-		<url>https://github.com/eureka-bpo/primefaces-premiumschedule</url>
-		<connection>scm:git:git@github.com:eureka-bpo/primefaces-premiumschedule.git</connection>
-		<developerConnection>scm:git:git@github.com:eureka-bpo/primefaces-premiumschedule.git</developerConnection>
+		<url>https://github.com/eureka-bpo/primefaces-taglib</url>
+		<connection>scm:git:git@github.com:eureka-bpo/primefaces-taglib.git</connection>
+		<developerConnection>scm:git:git@github.com:eureka-bpo/primefaces-taglib.git</developerConnection>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/eureka-bpo/primefaces-premiumschedule/issues</url>
+		<url>https://github.com/eureka-bpo/primefaces-taglib/issues</url>
 	</issueManagement>
 
 	<licenses>
@@ -43,6 +43,7 @@
 		<nexus.host>s01.oss.sonatype.org</nexus.host>
 
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+		<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
 		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
 		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
@@ -128,7 +129,7 @@
 					</plugin>
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.11.0</version>
+						<version>${maven-compiler-plugin.version}</version>
 						<configuration>
 							<source>1.8</source>
 							<target>1.8</target>
@@ -206,7 +207,7 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.11.0</version>
+						<version>${maven-compiler-plugin.version}</version>
 						<configuration>
 							<release>11</release>
 						</configuration>
