@@ -36,7 +36,7 @@
 	</developers>
 
 	<properties>
-		<primefaces.version>13.0.0</primefaces.version>
+		<primefaces.version>13.0.10</primefaces.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<source.directory>${project.basedir}/src/main/java</source.directory>
 		<gpg.executable>gpg</gpg.executable>
