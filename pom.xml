@@ -155,6 +155,35 @@
 						</executions>
 					</plugin>
 					<plugin>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven-source-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven-javadoc-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<doclint>none</doclint>
+						</configuration>
+					</plugin>
+					<plugin>
 						<artifactId>maven-gpg-plugin</artifactId>
 						<version>${maven-gpg-plugin.version}</version>
 						<executions>
@@ -213,124 +242,17 @@
 						</configuration>
 					</plugin>
 					<plugin>
-						<artifactId>maven-install-plugin</artifactId>
-						<version>${maven-install-plugin.version}</version>
+						<artifactId>maven-jar-plugin</artifactId>
 						<configuration>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.artifactId}</artifactId>
-							<version>${project.version}</version>
-							<packaging>jar</packaging>
-							<pomFile>pom.xml</pomFile>
-						</configuration>
-						<executions>
-							<execution>
-								<id>default-install</id>
-								<configuration>
-									<skip>true</skip>
-								</configuration>
-							</execution>
-							<execution>
-								<id>install-jakarta-classifier</id>
-								<phase>install</phase>
-								<goals>
-									<goal>install-file</goal>
-								</goals>
-								<configuration>
-									<classifier>jakarta</classifier>
-									<file>${project.build.directory}/${project.build.finalName}.jar</file>
-								</configuration>
-							</execution>
-							<execution>
-								<id>install-jakarta-sources-classifier</id>
-								<phase>install</phase>
-								<goals>
-									<goal>install-file</goal>
-								</goals>
-								<configuration>
-									<classifier>jakarta-sources</classifier>
-									<file>${project.build.directory}/${project.build.finalName}-sources.jar</file>
-								</configuration>
-							</execution>
-							<execution>
-								<id>install-jakarta-javadoc-classifier</id>
-								<phase>install</phase>
-								<goals>
-									<goal>install-file</goal>
-								</goals>
-								<configuration>
-									<classifier>jakarta-javadoc</classifier>
-									<file>${project.build.directory}/${project.build.finalName}-javadoc.jar</file>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<artifactId>maven-deploy-plugin</artifactId>
-						<configuration>
-							<skip>true</skip>
+							<classifier>jakarta</classifier>
 						</configuration>
 					</plugin>
-					<plugin>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${maven-gpg-plugin.version}</version>
-						<configuration>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.artifactId}</artifactId>
-							<version>${project.version}</version>
-							<packaging>jar</packaging>
-							<repositoryId>ossrh</repositoryId>
-							<url>https://${nexus.host}/content/repositories/releases</url>
-							<generatePom>false</generatePom>
-						</configuration>
-						<executions>
-							<execution>
-								<id>deploy-jakarta-classifier</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>sign-and-deploy-file</goal>
-								</goals>
-								<configuration>
-									<classifier>jakarta</classifier>
-									<file>${project.build.directory}/${project.build.finalName}.jar</file>
-								</configuration>
-							</execution>
-							<execution>
-								<id>deploy-jakarta-sources-classifier</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>sign-and-deploy-file</goal>
-								</goals>
-								<configuration>
-									<classifier>jakarta-sources</classifier>
-									<file>${project.build.directory}/${project.build.finalName}-sources.jar</file>
-								</configuration>
-							</execution>
-							<execution>
-								<id>deploy-jakarta-javadoc-classifier</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>sign-and-deploy-file</goal>
-								</goals>
-								<configuration>
-									<classifier>jakarta-javadoc</classifier>
-									<file>${project.build.directory}/${project.build.finalName}-javadoc.jar</file>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>publish</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
 					<plugin>
 						<artifactId>maven-source-plugin</artifactId>
 						<version>${maven-source-plugin.version}</version>
+						<configuration>
+							<classifier>jakarta-sources</classifier>
+						</configuration>
 						<executions>
 							<execution>
 								<id>attach-sources</id>
@@ -355,6 +277,33 @@
 						</executions>
 						<configuration>
 							<doclint>none</doclint>
+							<classifier>jakarta-javadoc</classifier>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-install-plugin</artifactId>
+						<version>${maven-install-plugin.version}</version>
+						<configuration>
+							<allowIncompleteProjects>true</allowIncompleteProjects>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<configuration>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<version>${project.version}</version>
+							<packaging>jar</packaging>
+							<repositoryId>ossrh</repositoryId>
+							<url>https://${nexus.host}/content/repositories/releases</url>
+							<generatePom>false</generatePom>
 						</configuration>
 					</plugin>
 				</plugins>
