@@ -1,22 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.eureka-bpo.primefaces</groupId>
-	<artifactId>premiumschedule</artifactId>
-	<version>13.0.0-SNAPSHOT</version>
+	<artifactId>eureka-bpo-taglib</artifactId>
+	<version>14.0.0-SNAPSHOT</version>
 
 	<name>Eureka-BPO PremiumSchedule</name>
 	<description>Eureka-BPO PremiumSchedule - Schedule Component for Primefaces with premium FullCalendar features: Vertical Resource View and Timeline View</description>
-	<url>https://github.com/eureka-bpo/primefaces-premiumschedule</url>
+	<url>https://github.com/eureka-bpo/primefaces-taglib</url>
 
 	<scm>
-		<url>https://github.com/eureka-bpo/primefaces-premiumschedule</url>
-		<connection>scm:git:git@github.com:eureka-bpo/primefaces-premiumschedule.git</connection>
-		<developerConnection>scm:git:git@github.com:eureka-bpo/primefaces-premiumschedule.git</developerConnection>
+		<url>https://github.com/eureka-bpo/primefaces-taglib</url>
+		<connection>scm:git:git@github.com:eureka-bpo/primefaces-taglib.git</connection>
+		<developerConnection>scm:git:git@github.com:eureka-bpo/primefaces-taglib.git</developerConnection>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/eureka-bpo/primefaces-premiumschedule/issues</url>
+		<url>https://github.com/eureka-bpo/primefaces-taglib/issues</url>
 	</issueManagement>
 
 	<licenses>
@@ -36,7 +36,7 @@
 	</developers>
 
 	<properties>
-		<primefaces.version>13.0.10</primefaces.version>
+		<primefaces.version>14.0.0</primefaces.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<source.directory>${project.basedir}/src/main/java</source.directory>
 		<gpg.executable>gpg</gpg.executable>
