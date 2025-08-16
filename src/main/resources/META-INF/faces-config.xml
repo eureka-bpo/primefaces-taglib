@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+        version="2.0">
 
     <name>eurekabpo_primefaces</name>
 
@@ -18,6 +19,11 @@
     <component>
         <component-type>eu.eurekabpo.primefaces.component.inputtextarea.InputTextarea</component-type>
         <component-class>eu.eurekabpo.primefaces.component.inputtextarea.InputTextarea</component-class>
+    </component>
+
+    <component>
+        <component-type>eu.eurekabpo.primefaces.component.schedule.CronExpressionEditor</component-type>
+        <component-class>eu.eurekabpo.primefaces.component.schedule.CronExpressionEditor</component-class>
     </component>
 
     <render-kit>
