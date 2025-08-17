@@ -417,4 +417,20 @@
             <type>java.lang.Integer</type>
         </attribute>
     </tag>
+    <tag>
+        <description>Eureka-BPO InputText</description>
+        <tag-name>inputText</tag-name>
+        <component>
+            <component-type>eu.eurekabpo.primefaces.component.inputtext.InputText</component-type>
+            <renderer-type>org.primefaces.component.InputTextRenderer</renderer-type>
+        </component>
+    </tag>
+    <tag>
+        <description>Eureka-BPO InputTextarea</description>
+        <tag-name>inputTextarea</tag-name>
+        <component>
+            <component-type>eu.eurekabpo.primefaces.component.inputtextarea.InputTextarea</component-type>
+            <renderer-type>org.primefaces.component.InputTextareaRenderer</renderer-type>
+        </component>
+    </tag>
 </facelet-taglib>

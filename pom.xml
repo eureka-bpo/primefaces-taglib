@@ -121,6 +121,14 @@
 											<token>jakarta.el</token>
 											<value>javax.el</value>
 										</replacement>
+										<replacement>
+											<token>jakarta.persistence</token>
+											<value>javax.persistence</value>
+										</replacement>
+										<replacement>
+											<token>jakarta.validation</token>
+											<value>javax.validation</value>
+										</replacement>
 									</replacements>
 								</configuration>
 							</execution>

@@ -10,11 +10,31 @@
         <component-class>eu.eurekabpo.primefaces.component.premiumschedule.PremiumSchedule</component-class>
     </component>
 
+    <component>
+        <component-type>eu.eurekabpo.primefaces.component.inputtext.InputText</component-type>
+        <component-class>eu.eurekabpo.primefaces.component.inputtext.InputText</component-class>
+    </component>
+
+    <component>
+        <component-type>eu.eurekabpo.primefaces.component.inputtextarea.InputTextarea</component-type>
+        <component-class>eu.eurekabpo.primefaces.component.inputtextarea.InputTextarea</component-class>
+    </component>
+
     <render-kit>
         <renderer>
             <component-family>org.primefaces.component</component-family>
             <renderer-type>eu.eurekabpo.primefaces.component.premiumschedule.PremiumSchedule</renderer-type>
             <renderer-class>eu.eurekabpo.primefaces.component.premiumschedule.PremiumScheduleRenderer</renderer-class>
+        </renderer>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.InputTextRenderer</renderer-type>
+            <renderer-class>org.primefaces.component.inputtext.InputTextRenderer</renderer-class>
+        </renderer>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.InputTextareaRenderer</renderer-type>
+            <renderer-class>org.primefaces.component.inputtextarea.InputTextareaRenderer</renderer-class>
         </renderer>
         <client-behavior-renderer>
             <client-behavior-renderer-type>org.primefaces.component.AjaxBehaviorRenderer</client-behavior-renderer-type>
