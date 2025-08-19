@@ -4,8 +4,8 @@
 	<artifactId>eureka-bpo-taglib</artifactId>
 	<version>14.0.0-SNAPSHOT</version>
 
-	<name>Eureka-BPO PremiumSchedule</name>
-	<description>Eureka-BPO PremiumSchedule - Schedule Component for Primefaces with premium FullCalendar features: Vertical Resource View and Timeline View</description>
+	<name>Eureka-BPO tag library</name>
+	<description>Eureka-BPO tag library</description>
 	<url>https://github.com/eureka-bpo/primefaces-taglib</url>
 
 	<scm>
