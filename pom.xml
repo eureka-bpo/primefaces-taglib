@@ -40,24 +40,19 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<source.directory>${project.basedir}/src/main/java</source.directory>
 		<gpg.executable>gpg</gpg.executable>
-		<nexus.host>s01.oss.sonatype.org</nexus.host>
 
 		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<maven-install-plugin.version>3.1.1</maven-install-plugin.version>
 		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
 		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
+		<central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
 	</properties>
 
 	<profiles>
 		<profile>
 			<id>java-ee</id>
-			<activation>
-				<property>
-					<name>env.JAVAEE</name>
-				</property>
-			</activation>
 			<properties>
 				<source.directory>${project.build.directory}/java-ee/src/main/java</source.directory>
 			</properties>
@@ -135,14 +130,6 @@
 						</executions>
 					</plugin>
 					<plugin>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.11.0</version>
-						<configuration>
-							<source>1.8</source>
-							<target>1.8</target>
-						</configuration>
-					</plugin>
-					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
 						<version>${maven-antrun-plugin.version}</version>
 						<executions>
@@ -191,12 +178,43 @@
 						</configuration>
 					</plugin>
 					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>${build-helper-maven-plugin.version}</version>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>${project.build.directory}/${project.artifactId}-${project.version}-jakarta.${project.packaging}</file>
+									<type>jar</type>
+									<classifier>jakarta</classifier>
+								</artifact>
+								<artifact>
+									<file>${project.build.directory}/${project.artifactId}-${project.version}-jakarta-sources.${project.packaging}</file>
+									<type>jar</type>
+									<classifier>jakarta-sources</classifier>
+								</artifact>
+								<artifact>
+									<file>${project.build.directory}/${project.artifactId}-${project.version}-jakarta-javadoc.${project.packaging}</file>
+									<type>jar</type>
+									<classifier>jakarta-javadoc</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>deploy</phase>
+								<goals>
+									<goal>attach-artifact</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
 						<artifactId>maven-gpg-plugin</artifactId>
 						<version>${maven-gpg-plugin.version}</version>
 						<executions>
 							<execution>
-								<id>sign-artifacts</id>
-								<phase>install</phase>
+								<phase>deploy</phase>
 								<goals>
 									<goal>sign</goal>
 								</goals>
@@ -204,26 +222,28 @@
 						</executions>
 					</plugin>
 					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${nexus-staging-maven-plugin.version}</version>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<version>${central-publishing-maven-plugin.version}</version>
 						<extensions>true</extensions>
 						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://${nexus.host}/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<publishingServerId>central</publishingServerId>
 						</configuration>
+						<executions>
+							<execution>
+								<phase>deploy</phase>
+								<goals>
+									<goal>publish</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
+
 				</plugins>
 			</build>
 		</profile>
 		<profile>
 			<id>jakarta-ee</id>
-			<activation>
-				<property>
-					<name>!env.JAVAEE</name>
-				</property>
-			</activation>
 			<dependencies>
 				<dependency>
 					<groupId>jakarta.platform</groupId>
@@ -241,13 +261,6 @@
 			</dependencies>
 			<build>
 				<plugins>
-					<plugin>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.11.0</version>
-						<configuration>
-							<release>11</release>
-						</configuration>
-					</plugin>
 					<plugin>
 						<artifactId>maven-jar-plugin</artifactId>
 						<configuration>
@@ -294,25 +307,6 @@
 							<allowIncompleteProjects>true</allowIncompleteProjects>
 						</configuration>
 					</plugin>
-					<plugin>
-						<artifactId>maven-deploy-plugin</artifactId>
-						<configuration>
-							<skip>true</skip>
-						</configuration>
-					</plugin>
-					<plugin>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${maven-gpg-plugin.version}</version>
-						<configuration>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.artifactId}</artifactId>
-							<version>${project.version}</version>
-							<packaging>jar</packaging>
-							<repositoryId>ossrh</repositoryId>
-							<url>https://${nexus.host}/content/repositories/releases</url>
-							<generatePom>false</generatePom>
-						</configuration>
-					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -322,6 +316,13 @@
 		<defaultGoal>install</defaultGoal>
 		<sourceDirectory>${source.directory}</sourceDirectory>
 		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.primefaces.extensions</groupId>
 				<artifactId>resources-optimizer-maven-plugin</artifactId>
@@ -424,6 +425,12 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
