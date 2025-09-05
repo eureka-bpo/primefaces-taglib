@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.eureka-bpo.primefaces</groupId>
 	<artifactId>eureka-bpo-taglib</artifactId>
-	<version>15.0.7-SNAPSHOT</version>
+	<version>15.0.0</version>
 
 	<name>Eureka-BPO tag library</name>
 	<description>Eureka-BPO tag library</description>
