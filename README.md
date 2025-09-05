@@ -11,5 +11,9 @@ In addition to standard Primefaces Schedule possibilities (Outlook Calendar, iCa
 
 Enhancement of standard Primefaces InputText and InputTextarea components: when `value`-attribute expression of these components is a backing bean property with annotation `@Column(length=<YOUR VALUE>)` of `@Max(value=<YOUR VALUE>)` InputText/InputTextarea'a attribute `maxlength=<YOUR VALUE>` automatically added.
 
+### Cron Expression Editor
+
+Visual editor of cron expressions based on the Quartz engine.
+
 ## Details
 Detailed descriptions are in the [Wiki](https://github.com/eureka-bpo/primefaces-taglib/wiki).
